@@ -1,0 +1,20 @@
+body {
+  background-color: black;
+}
+div {
+  font-family: Georgia;
+  text-align: center;
+  color: white;
+}
+div.counter {
+  font-size: 35em;
+}
+a {
+  color: white;
+}
+div.hidden {
+  color: black;
+}
+div.hidden a {
+  color: black;
+}
