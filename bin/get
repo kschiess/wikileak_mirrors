@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.dirname(__FILE__) + "/../lib"
+
+require 'wikileaks_mirror_count'
+p WikileaksMirrorCount.new('http://wikileaks.ch/mirrors.html').get
