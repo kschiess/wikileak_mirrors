@@ -36,11 +36,20 @@ describe YamlStore do
     its(:current) { should == 'foobar' }
     
     describe "temp directory" do
-      it "should contain a yaml file storing 'foobar'" do
-        name = store_time.strftime("%Y%m%d-%H%M.yaml")
-        File.exist?(tempfile(name)).should == true
+      let(:name) { tempfile(store_time.strftime("%Y%m%d-%H%M.yaml")) }
+      context "current yaml file" do
+        it "should exist as a file" do
+          File.exist?(name).should == true
+        end 
+        it "should store 'foobar'" do
+          YAML.load_file(name).should == 'foobar'
+        end 
       end
-      it "should contain a symbolic link to the current file"
+      it "should contain a symbolic link to the current file" do
+        current = tempfile('current.yaml')
+        File.symlink?(current).should == true
+        File.readlink(current).should == name
+      end
     end
   end
 end

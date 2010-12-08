@@ -1,4 +1,5 @@
 
+require 'fileutils'
 require 'yaml'
 
 # A store that keeps N versions of a given Ruby object. Access always 
@@ -20,9 +21,11 @@ class YamlStore
   # Saves an object as most current object. 
   #
   def store(obj, time=Time.now)
-    File.open(yaml_for(time), 'w') do |file|
+    name = yaml_for(time.strftime("%Y%m%d-%H%M"))
+    File.open(name, 'w') do |file|
       file.print obj.to_yaml
     end
+    FileUtils.ln_s(name, yaml_for('current'))
     
     @current = obj
   end
@@ -34,9 +37,9 @@ class YamlStore
   end
   
 private 
-  def yaml_for(time)
+  def yaml_for(name)
     File.join(
       @directory, 
-      time.strftime("%Y%m%d-%H%M.yaml"))
+      "#{name}.yaml")
   end
 end
