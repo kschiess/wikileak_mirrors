@@ -36,8 +36,14 @@ describe MirrorList do
       end
     end
     describe "#each" do
-      it "should behave like an empty array" do
-        list.to_a.should == []
+      it "should return just the seed url" do
+        yields = 0
+        list.each do |url|
+          yields += 1
+          url.should == 'seed url'
+        end
+        
+        yields.should == 1
       end
     end
   end

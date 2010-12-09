@@ -16,12 +16,6 @@ class MirrorList
     @store = YamlStore.new(store_dir)
   end
   
-  # Returns the current list
-  #
-  def list
-    @store.current || [@seed_url] 
-  end
-  
   # Refreshes all mirrors by asking one of the mirrors for an up to date list. 
   # This list is then stored and becomes the current list. 
   #
@@ -36,13 +30,13 @@ class MirrorList
   # before using the collection. 
   #
   def each(&block)
-    # list.each(&block)
+    list.each(&block)
   end
   include Enumerable
   
   # Tries as many mirrors as needed to get a valid result.
   def retrieve
-    list.each do |url|
+    each do |url|
       begin
         return retrieve_mirrors(url)
       rescue 
@@ -51,5 +45,11 @@ class MirrorList
     end
     
     fail "Could not fetch a current list - none of the mirrors answered. Try reseeding."
+  end
+  
+  # Returns the current list
+  #
+  def list
+    @store.current || [@seed_url] 
   end
 end
