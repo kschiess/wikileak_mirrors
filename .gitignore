@@ -1,4 +1,4 @@
 .bundle
 index.html
 data
-spec/generated
+spec/generated/*.htm*
