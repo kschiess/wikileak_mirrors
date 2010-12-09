@@ -21,13 +21,7 @@ class YamlStore
   # Saves an object as most current object. 
   #
   def store(obj, time=Time.now)
-    n = 0
-    name = nil
-    loop do
-      n+= 1
-      name = yaml_for(time.strftime("%Y%m%d-%H%M") + sprintf("-%02d", n))
-      break unless File.exist?(name)
-    end
+    name = generate_unique_name(time)
     
     File.open(name, 'w') do |file|
       file.print obj.to_yaml
@@ -44,6 +38,17 @@ class YamlStore
   end
   
 private 
+  def generate_unique_name(time)
+    n = 0
+    loop do
+      n += 1
+      name = yaml_for(time.strftime("%Y%m%d-%H%M") + sprintf("-%02d", n))
+      return name unless File.exist?(name)
+    end
+    
+    # NEVER REACHED
+  end
+
   def yaml_for(name)
     File.join(
       @directory, 
