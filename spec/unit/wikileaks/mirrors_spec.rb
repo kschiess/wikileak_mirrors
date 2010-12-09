@@ -43,14 +43,15 @@ describe Wikileaks::Mirrors do
     describe "<- scrape" do
       context "using a fixture html" do
         let(:html) { File.read(fixture('mirrors.html')) }
-        let(:result) { mirrors.scrape(html) }
+        let(:result) { mirrors.scrape(html, 'seed url') }
         
         subject { result }
-        it { should have(1334).entries }
+        it { should have(1335).entries }
+        it { should include('seed url') }
         context "entries" do
           it "should start with http://" do
             entry_re = %r(http://)
-            result.each do |entry|
+            result.first(100).each do |entry|
               entry.should match(entry_re)
             end
           end 
