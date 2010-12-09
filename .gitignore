@@ -1,3 +1,4 @@
 .bundle
 index.html
 data
+spec/generated
