@@ -1,5 +1,4 @@
 require 'erb'
-require 'active_support'
 
 class Renderer
   
