@@ -1,4 +1,5 @@
 
+require 'wikileaks'
 require 'yaml_store'
 
 # A persistent list of mirrors.
@@ -45,6 +46,12 @@ class MirrorList
     end
     
     fail "Could not fetch a current list - none of the mirrors answered. Try reseeding."
+  end
+
+  # Retrieves the mirror list using the baseurl as mirror. 
+  #
+  def retrieve_mirrors(baseurl)
+    Wikileaks::Mirrors.get(baseurl)
   end
   
   # Returns the current list

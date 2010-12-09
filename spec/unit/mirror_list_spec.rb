@@ -19,6 +19,15 @@ describe MirrorList do
   end
   
   let(:list) { MirrorList.new(temp_path, 'seed url') }
+
+  describe "<- #retrieve_mirrors(baseurl)" do
+    it "should delegate to Wikileaks::Mirror.retrieve(baseurl)" do
+      flexmock(Wikileaks::Mirrors).
+        should_receive(:get).with('baseurl').once
+        
+      list.retrieve_mirrors('baseurl')
+    end
+  end
   
   context "when mirror store is empty" do
     describe "<- #refresh" do
