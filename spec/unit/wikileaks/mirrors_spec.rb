@@ -26,7 +26,7 @@ describe Wikileaks::Mirrors do
       it "should scrape html and return the result" do
         flexmock(mirrors).
           should_receive(:html_for => 'html').
-          should_receive(:scrape).with('html').once.and_return(:result)
+          should_receive(:scrape).with('html', 'baseurl').once.and_return(:result)
           
         mirrors.get.should == :result
       end 

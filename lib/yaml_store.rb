@@ -26,7 +26,7 @@ class YamlStore
     File.open(name, 'w') do |file|
       file.print obj.to_yaml
     end
-    FileUtils.ln_s(name, yaml_for('current'), :force => true)
+    FileUtils.ln_s(File.expand_path(name), yaml_for('current'), :force => true)
     
     @current = obj
   end

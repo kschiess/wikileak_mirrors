@@ -15,7 +15,7 @@ class Wikileaks::Mirrors
   #
   def get()
     html = html_for(baseurl)
-    scrape html
+    scrape html, baseurl
   end
   def self.get(baseurl)
     new(baseurl).get
