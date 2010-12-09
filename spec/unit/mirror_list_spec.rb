@@ -36,7 +36,9 @@ describe MirrorList do
       end
     end
     describe "#each" do
-      it "should behave like an empty array" 
+      it "should behave like an empty array" do
+        list.to_a.should == []
+      end
     end
   end
 end
