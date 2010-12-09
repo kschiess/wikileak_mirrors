@@ -29,8 +29,7 @@ describe MirrorList do
         list.refresh
       end
       it "should store current mirrors" do
-        flexmock(list).
-          should_receive(:retrieve_mirrors => :list)
+        flexmock(list).should_receive(:retrieve_mirrors => :list)
         list.refresh
         
         list.store.current.should == :list
