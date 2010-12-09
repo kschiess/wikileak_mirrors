@@ -21,11 +21,18 @@ class YamlStore
   # Saves an object as most current object. 
   #
   def store(obj, time=Time.now)
-    name = yaml_for(time.strftime("%Y%m%d-%H%M"))
+    n = 0
+    name = nil
+    loop do
+      n+= 1
+      name = yaml_for(time.strftime("%Y%m%d-%H%M") + sprintf("-%02d", n))
+      break unless File.exist?(name)
+    end
+    
     File.open(name, 'w') do |file|
       file.print obj.to_yaml
     end
-    FileUtils.ln_s(name, yaml_for('current'))
+    FileUtils.ln_s(name, yaml_for('current'), :force => true)
     
     @current = obj
   end
