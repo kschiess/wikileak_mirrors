@@ -40,8 +40,9 @@ class MirrorList
     each do |url|
       begin
         return retrieve_mirrors(url)
-      rescue 
+      rescue => b
         # Something bad happened - just continue trying all mirrors
+        puts "Mirror #{url}: #{b} (retrying with other urls...)"
       end
     end
     

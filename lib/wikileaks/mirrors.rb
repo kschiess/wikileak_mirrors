@@ -1,4 +1,5 @@
 
+require 'open-uri'
 require 'scrapi'
 
 # Models a list of mirror locations.
