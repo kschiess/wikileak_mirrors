@@ -31,10 +31,16 @@ class YamlStore
     @current = obj
   end
   
+  def load
+    YAML.load_file(yaml_for('current'))
+  rescue 
+    nil
+  end
+  
   # Returns the most current object stored or nil.
   #
   def current
-    @current
+    @current ||= load
   end
   
 private 

@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.dirname(__FILE__) + "/../lib"
+
+require 'mirror_list'
+
+list = MirrorList.new('data', 'http://www.wikileaks.ch')
+list.each do |mirror|
+  puts mirror
+end

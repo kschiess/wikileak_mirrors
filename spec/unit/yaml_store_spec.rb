@@ -51,13 +51,23 @@ describe YamlStore do
         File.readlink(current).should == name
       end
     end
+    context "a new instance" do
+      subject { YamlStore.new(temp_path) }
+      
+      its(:current) { should == 'foobar' }
+    end
 
     context "after a second store" do
       let(:store_time) { Time.now+1 }
       before(:each) do
-        store.store 'foobar', store_time
+        store.store 'foobaz', store_time
       end
       
+      context "a new instance" do
+        subject { YamlStore.new(temp_path) }
+        
+        its(:current) { should == 'foobaz' }
+      end
       context "temp directory" do
         it "should contain 3 files" do
           Dir[tempfile('*')].should have(3).entries
