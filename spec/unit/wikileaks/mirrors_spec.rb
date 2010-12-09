@@ -46,7 +46,7 @@ describe Wikileaks::Mirrors do
         let(:result) { mirrors.scrape(html, 'seed url') }
         
         subject { result }
-        it { should have(1335).entries }
+        it { should have(1290).entries }
         it { should include('seed url') }
         context "entries" do
           it "should start with http://" do

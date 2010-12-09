@@ -28,7 +28,10 @@ class Wikileaks::Mirrors
   end
   
   def scrape(html, seed_url)
-    scraper.scrape(html) << seed_url
+    urls = scraper.scrape(html) 
+    urls << seed_url
+    
+    urls.uniq
   end
   
   def scraper
