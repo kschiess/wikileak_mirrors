@@ -17,7 +17,7 @@ describe Renderer do
       @renderer.should_receive(:extract_list).and_return @list
     end
     it 'should render without fail' do
-      @renderer.render_into 'spec/fixtures/some_template.html'
+      lambda { @renderer.render_into 'spec/generated/some_template.html' }.should_not raise_error
     end
   end
   

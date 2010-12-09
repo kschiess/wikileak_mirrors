@@ -20,9 +20,9 @@ describe Renderer do
       @renderer.should_receive(:refresh)
     end
     it 'should render' do
-      @renderer.render_into 'spec/fixtures/some_template.html'
+      @renderer.render_into 'spec/generated/some_template.html'
       
-      File.open('spec/fixtures/some_template.html', 'r') do |file|
+      File.open('spec/generated/some_template.html', 'r') do |file|
         lines = file.readlines
         @list.include?(lines.shift.chomp).should == true
         lines.shift.should == '3'
