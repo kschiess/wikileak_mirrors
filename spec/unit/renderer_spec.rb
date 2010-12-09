@@ -3,13 +3,13 @@ require 'renderer'
 
 describe Renderer do
   
-  it 'takes two parameters' do
-    lambda { Renderer.new :a, :b }.should_not raise_error
-  end
-  
   before(:each) do
     @mirror_list   = flexmock :mirror_list
     @renderer      = flexmock Renderer.new('spec/fixtures/some_template.erb', @mirror_list)
+  end
+  
+  it 'takes two parameters' do
+    lambda { Renderer.new :a, :b }.should_not raise_error
   end
   
   describe 'render_into' do
