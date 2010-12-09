@@ -2,16 +2,9 @@
 
 $:.unshift File.dirname(__FILE__) + "/../lib"
 
-require 'active_support'
-require 'erb'
 require 'mirror_list'
+require 'renderer'
 
-mirror_list  = MirrorList.new('data', 'http://www.wikileaks.ch')
-mirror_list.refresh
-
-list = mirror_list.to_a
-template = ERB.new File.new('templates/index.erb').read, nil, '%'
-
-File.open('index.html', 'w') do |file|
-  file.write template.result binding
-end
+mirror_list = MirrorList.new('data', 'http://www.wikileaks.ch')
+renderer    = Renderer.new 'templates/index.erb', mirror_list
+renderer.render_into 'index.html'
