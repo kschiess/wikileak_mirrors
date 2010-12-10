@@ -3,8 +3,7 @@
 $:.unshift File.dirname(__FILE__) + "/../lib"
 
 require 'mirror_list'
-require 'renderer'
+require 'control'
 
 mirror_list = MirrorList.new('data', 'http://www.wikileaks.ch')
-renderer    = Renderer.new 'templates/index.erb', mirror_list
-renderer.render_into 'index.html'
+Control.new(mirror_list).render

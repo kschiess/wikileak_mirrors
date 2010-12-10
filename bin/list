@@ -3,8 +3,7 @@
 $:.unshift File.dirname(__FILE__) + "/../lib"
 
 require 'mirror_list'
+require 'control'
 
-list = MirrorList.new('data', 'http://www.wikileaks.ch')
-list.each do |mirror|
-  puts mirror
-end
+mirror_list = MirrorList.new('data', 'http://www.wikileaks.ch')
+Control.new(mirror_list).list

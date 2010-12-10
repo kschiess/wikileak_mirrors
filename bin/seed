@@ -13,11 +13,7 @@ if ARGV.empty?
 end
 
 require 'mirror_list'
-list = MirrorList.new(data_dir, ARGV.first)
+require 'control'
 
-puts "Fetching mirrors..."
-list.refresh
-
-list.each do |mirror|
-  puts mirror
-end
+mirror_list = MirrorList.new(data_dir, ARGV.first)
+Control.new(mirror_list).seed
