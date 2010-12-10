@@ -6,5 +6,7 @@ require 'mirror_list'
 require 'renderer'
 
 mirror_list = MirrorList.new('data', 'http://www.wikileaks.ch')
+mirror_list.refresh
+
 renderer    = Renderer.new 'templates/index.erb', mirror_list
 renderer.render_into 'index.html'
