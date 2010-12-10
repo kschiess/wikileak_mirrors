@@ -1,14 +1,16 @@
 require 'renderer'
 
 # Provides the following methods:
-# * list: Lists all wikileaks mirrors.
+# * list: Shows the latest cached list of wikileaks mirrors.
 # * render: Refreshes and renders.
-# * seed: 
+# * seed: Refreshes and shows the list.
 #
 class Control
   
   attr_reader :mirror_list
   
+  # A Control object takes a mirror list on which to operate.
+  #
   def initialize mirror_list
     @mirror_list = mirror_list
   end
