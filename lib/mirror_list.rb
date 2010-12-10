@@ -26,6 +26,13 @@ class MirrorList
     store.store new_list
   end
   
+  # Checks all links in the list. Links that don't work are removed from the
+  # list. 
+  #
+  def check
+    
+  end
+  
   # Implement Enumerable. If you want to be sure to have a list of mirrors,
   # whether or not a previous list has been retrieved, then call #refresh
   # before using the collection. 

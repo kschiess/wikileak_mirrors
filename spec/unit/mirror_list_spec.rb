@@ -28,6 +28,9 @@ describe MirrorList do
       list.retrieve_mirrors('baseurl')
     end
   end
+  describe "<- #check" do
+    
+  end
   
   context "when mirror store is empty" do
     describe "<- #refresh" do
