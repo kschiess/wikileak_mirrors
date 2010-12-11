@@ -1,4 +1,6 @@
 
+require 'timeout'
+
 # A http link class that allows for simple link checking. 
 #
 class Link
@@ -12,8 +14,10 @@ class Link
   end
   
   def ok?
-    open(url) do |io|
-      return true
+    timeout(5) do
+      open(url) do |io|
+        return true
+      end
     end
     
     # NEVER REACHED

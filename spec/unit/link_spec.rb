@@ -11,6 +11,11 @@ describe Link do
     it { should == 'http://www.someurl.com' }
   end
   describe "<- #ok?" do
+    context "when the operation takes really long" do
+      before(:each) { flexmock(link).should_receive(:open).and_raise(Timeout::Error) }
+      subject { link.ok? }
+      it { should == false}
+    end
     context "when open fails" do
       before(:each) { flexmock(link).should_receive(:open).and_raise('fail') }
       subject { link.ok? }

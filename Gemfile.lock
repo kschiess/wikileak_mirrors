@@ -6,6 +6,7 @@ GEM
       rake (>= 0.8.7)
     flexmock (0.8.11)
     procrastinate (0.1.0)
+    progressbar (0.9.0)
     rake (0.8.7)
     rspec (2.0.1)
       rspec-core (~> 2.0.1)
@@ -19,6 +20,7 @@ GEM
       rspec-expectations (~> 2.0.1)
     scrapi (2.0.0)
       tidy_ffi (>= 0.1.2)
+    text-highlight (1.0.2)
     tidy_ffi (0.1.3)
       ffi (>= 0.3.5)
 
@@ -28,5 +30,7 @@ PLATFORMS
 DEPENDENCIES
   flexmock
   procrastinate
+  progressbar
   rspec
   scrapi
+  text-highlight

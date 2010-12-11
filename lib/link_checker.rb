@@ -1,4 +1,5 @@
 
+require 'progressbar'
 require 'yaml'
 require 'procrastinate'
 require 'open-uri'
@@ -49,7 +50,7 @@ class LinkChecker
       status = link.ok? ? :ok : :broken
       transport.write [link, status]
     rescue => b
-      p [:err, b]
+      transport.write [link, :error]
     end
   end
   
@@ -60,13 +61,14 @@ class LinkChecker
     transport = FramedIo.new
     
     scheduler = Scheduler.start(
-      DispatchStrategy::Throttled.new(10))
+      DispatchStrategy::Throttled.new(30))
 
     worker = scheduler.create_proxy(Worker.new)
     links.each do |link|
       worker.check(link, transport)
     end
     
+    bar = ProgressBar.new('links', links.size)
     links.size.times do
       answer = transport.read
       link, status = answer
@@ -76,7 +78,9 @@ class LinkChecker
       else
         @good << link.to_s
       end
+      bar.inc
     end
+    bar.finish
 
     scheduler.shutdown
   end

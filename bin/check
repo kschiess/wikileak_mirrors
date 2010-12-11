@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.dirname(__FILE__) + "/../lib"
+
+require 'text/highlight'
+String.highlighter = Text::ANSIHighlighter.new
+
+require 'link_checker'
+require 'mirror_list'
+
+mirror_list = MirrorList.new('data', 'http://www.wikileaks.ch')
+
+lc = LinkChecker.new(mirror_list.list)
+puts "Checking links:"
+lc.check
+puts "done."
+
+mirror_list.each do |link|
+  printf "%-50s", link 
+  if lc.good.include?(link)
+    puts 'OK'.green
+  else
+    puts 'BAD'.red
+  end
+end
