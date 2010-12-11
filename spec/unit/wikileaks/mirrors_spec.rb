@@ -46,8 +46,11 @@ describe Wikileaks::Mirrors do
         let(:result) { mirrors.scrape(html, 'seed url') }
         
         subject { result }
-        it { should have(1290).entries }
+        it { should have(1335).entries }
+
         it { should include('seed url') }
+        it { should include('http://wikileaks.kafe-in.net') }
+        
         context "entries" do
           it "should start with http://" do
             entry_re = %r(http://)

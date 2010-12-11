@@ -28,9 +28,6 @@ describe MirrorList do
       list.retrieve_mirrors('baseurl')
     end
   end
-  describe "<- #check" do
-    
-  end
   
   context "when mirror store is empty" do
     describe "<- #refresh" do
@@ -56,6 +53,18 @@ describe MirrorList do
         end
         
         yields.should == 1
+      end
+    end
+  end
+  context "when mirror store is seeded" do
+    before(:each) { flexmock(list, :list => ['other url']) }
+    context "when open from seed url fails" do
+      before(:each) { flexmock(list).
+        should_receive(:retrieve_mirrors).with('seed url').and_raise('hell').
+        should_receive(:retrieve_mirrors).and_return(:list) 
+      }
+      it "should try urls from the store" do
+        list.refresh
       end
     end
   end
