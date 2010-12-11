@@ -40,8 +40,13 @@ class LinkChecker
     def read
       sizestr = @read.read(4)
       size = sizestr.unpack('l').first
-      
+
       YAML.load(@read.read(size))
+    end
+    
+    def close
+      @read.close
+      @write.close
     end
   end
   
@@ -49,8 +54,7 @@ class LinkChecker
     def check(link, transport)
       status = link.ok? ? :ok : :broken
       transport.write [link, status]
-    rescue => b
-      transport.write [link, :error]
+      transport.close
     end
   end
   
@@ -73,7 +77,7 @@ class LinkChecker
       answer = transport.read
       link, status = answer
       
-      if status == :broken
+      if status == :broken || status == :error
         @broken << link.to_s
       else
         @good << link.to_s
@@ -82,6 +86,6 @@ class LinkChecker
     end
     bar.finish
 
-    scheduler.shutdown
+    # scheduler.shutdown
   end
 end
