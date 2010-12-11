@@ -2,8 +2,12 @@
 
 $:.unshift File.dirname(__FILE__) + "/../lib"
 
+data_dir = File.dirname(__FILE__) + "/../data"
+require 'fileutils'
+FileUtils.mkdir_p(data_dir)
+
 require 'mirror_list'
 require 'control'
 
-mirror_list = MirrorList.new('data', 'http://www.wikileaks.ch')
+mirror_list = MirrorList.new(data_dir, 'http://www.wikileaks.ch')
 Control.new(mirror_list).render

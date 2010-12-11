@@ -31,6 +31,7 @@ class Control
       each do |k,v|
         $stderr.puts "#{k}: #{v}"
       end
+    $stderr.puts "#{mirror_list.to_a.size} mirrors."
   end
   
   # 1. Refreshes the list of mirrors.
