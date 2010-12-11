@@ -14,5 +14,9 @@ describe LinkChecker do
       subject { checker.broken }
       it { should include("http://www.thisdoesntexistlikethis.com") }
     end
+    describe "<- #good" do
+      subject { checker.good }
+      it { should include("http://www.google.com") }
+    end
   end
 end

@@ -1,6 +1,7 @@
 
 require 'yaml'
 require 'procrastinate'
+require 'open-uri'
 
 require 'link'
 
@@ -12,6 +13,9 @@ class LinkChecker
   
   # A list of broken links (subset of links)
   attr_reader :broken
+  
+  # A list of good links (that answer)
+  attr_reader :good
   
   # All links that have been checked for
   attr_reader :links
@@ -42,8 +46,6 @@ class LinkChecker
   
   class Worker
     def check(link, transport)
-      puts "Checking #{link}"
-
       status = link.ok? ? :ok : :broken
       transport.write [link, status]
     rescue => b
@@ -53,6 +55,7 @@ class LinkChecker
   
   def check
     @broken = []
+    @good   = []
     
     transport = FramedIo.new
     
@@ -70,6 +73,8 @@ class LinkChecker
       
       if status == :broken
         @broken << link.to_s
+      else
+        @good << link.to_s
       end
     end
 
