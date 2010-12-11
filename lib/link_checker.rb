@@ -31,9 +31,9 @@ class LinkChecker
     end
     
     def write(msg)
-      buf = msg.to_yaml
+      yaml_msg = msg.to_yaml
+      buf = [yaml_msg.size].pack('l') + yaml_msg
       
-      @write.write [buf.size].pack('l')
       @write.write buf
     end
     
