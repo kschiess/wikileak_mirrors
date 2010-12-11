@@ -18,9 +18,19 @@ class Control
   # Lists all mirrors of wikileaks.ch.
   #
   def list
+    dupe_checker = Hash.new(0)
     mirror_list.each do |mirror|
+      dupe_checker[mirror] += 1
       puts mirror
     end
+    
+    $stderr.puts
+    $stderr.puts "Duplicates found:"
+    dupe_checker.
+      reject { |k,v| v<=2 }.
+      each do |k,v|
+        $stderr.puts "#{k}: #{v}"
+      end
   end
   
   # 1. Refreshes the list of mirrors.
