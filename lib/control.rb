@@ -24,14 +24,14 @@ class Control
       puts mirror
     end
     
-    $stderr.puts
-    $stderr.puts "Duplicates found:"
+    puts
+    puts "Duplicates found:"
     dupe_checker.
       reject { |k,v| v<=2 }.
       each do |k,v|
-        $stderr.puts "#{k}: #{v}"
+        puts "#{k}: #{v}"
       end
-    $stderr.puts "#{mirror_list.to_a.size} mirrors."
+    puts "#{mirror_list.list.size} mirrors."
   end
   
   # 1. Refreshes the list of mirrors.

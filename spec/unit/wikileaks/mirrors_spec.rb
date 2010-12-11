@@ -41,7 +41,13 @@ describe Wikileaks::Mirrors do
       end 
     end
     describe "<- scrape" do
-      context "using a fixture html" do
+      context "using a fixture html: mirrors2.html" do
+        let(:html) { File.read(fixture('mirrors2.html')) }
+        let(:result) { mirrors.scrape(html, 'seed url') }
+        subject { result }
+        it { should have(1698).entries }
+      end
+      context "using a fixture html: mirrors.html" do
         let(:html) { File.read(fixture('mirrors.html')) }
         let(:result) { mirrors.scrape(html, 'seed url') }
         
@@ -55,6 +61,7 @@ describe Wikileaks::Mirrors do
           it "should start with http://" do
             entry_re = %r(http://)
             result.first(100).each do |entry|
+              next if entry == 'seed url'
               entry.should match(entry_re)
             end
           end 
