@@ -7,6 +7,10 @@ class Link
     @url = url
   end
   
+  def to_s
+    url
+  end
+  
   def ok?
     open(url) do |io|
       return true
