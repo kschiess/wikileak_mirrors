@@ -15,11 +15,18 @@ puts "Checking links:"
 lc.check
 puts "done."
 
+total = bad = 0
+
 mirror_list.each do |link|
+  total += 1
+  
   printf "%-50s", link 
   if lc.good.include?(link)
     puts 'OK'.green
   else
     puts 'BAD'.red
+    bad += 1
   end
 end
+
+printf "~ %d%% of hosts are bad.\n", (bad*100/total)
