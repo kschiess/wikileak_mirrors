@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+data_dir = File.dirname(__FILE__) + "/../data"
+require 'fileutils'
+FileUtils.mkdir_p data_dir

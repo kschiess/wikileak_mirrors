@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.dirname(__FILE__) + "/../lib"
+
+require 'mirror_list'
+
+mirror_list = MirrorList.new('data', 'http://www.wikileaks.ch')
+mirror_list.weed
