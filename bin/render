@@ -3,11 +3,10 @@
 $:.unshift File.dirname(__FILE__) + "/../lib"
 
 data_dir = File.dirname(__FILE__) + "/../data"
-require 'fileutils'
-FileUtils.mkdir_p(data_dir)
 
 require 'mirror_list'
-require 'control'
+require 'renderer'
 
 mirror_list = MirrorList.new(data_dir, 'http://www.wikileaks.ch')
-Control.new(mirror_list).render
+renderer = Renderer.new 'templates/index.erb', mirror_list
+renderer.render_into 'index.html'

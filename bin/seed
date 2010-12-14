@@ -3,8 +3,6 @@
 $:.unshift File.dirname(__FILE__) + "/../lib"
 
 data_dir = File.dirname(__FILE__) + "/../data"
-require 'fileutils'
-FileUtils.mkdir_p(data_dir)
 
 if ARGV.empty?
   puts "Usage: seed MIRROR_URL"
