@@ -34,18 +34,6 @@ class Control
     puts "#{mirror_list.list.size} mirrors."
   end
   
-  # 1. Refreshes the list of mirrors.
-  # 2. Renders into index.html.
-  #
-  def render source = 'templates/index.erb', target = 'index.html'
-    refresh
-    renderer = renderer_for source
-    renderer.render_into target
-  end
-  def renderer_for source
-    Renderer.new source, mirror_list
-  end
-  
   # 1. Refreshes the mirror list.
   # 2. Shows the list.
   #
