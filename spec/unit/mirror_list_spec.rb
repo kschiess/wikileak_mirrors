@@ -29,6 +29,28 @@ describe MirrorList do
     end
   end
   
+  describe 'weed' do
+    before(:each) do
+      @link_checker = flexmock :link_checker, :check => nil
+      flexmock(LinkChecker).should_receive :new => @link_checker
+      
+      flexmock(@link_checker).should_receive :good => :good_list
+    end
+    it 'checks using the link checker' do
+      @link_checker.should_receive(:check).once.with()
+      
+      list.weed
+    end
+    it 'uses the good and saves it' do
+      store = flexmock :store
+      flexmock(list).should_receive :store => store
+      
+      store.should_receive(:store).once.with :good_list
+      
+      list.weed
+    end
+  end
+  
   context "when mirror store is empty" do
     describe "<- #refresh" do
       it "should retrieve mirrors from seed url" do

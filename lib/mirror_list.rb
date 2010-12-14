@@ -1,6 +1,7 @@
 
 require 'wikileaks'
 require 'yaml_store'
+require 'link_checker'
 
 # A persistent list of mirrors.
 #
@@ -31,6 +32,14 @@ class MirrorList
   #
   def check
     
+  end
+  
+  # Separates the good from the bad and saves the clean list.
+  #
+  def weed
+    checker = LinkChecker.new list
+    checker.check
+    store.store checker.good
   end
   
   # Implement Enumerable. If you want to be sure to have a list of mirrors,
