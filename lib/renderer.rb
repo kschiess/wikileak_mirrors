@@ -24,8 +24,6 @@ class Renderer
   # Renders an index.html from the given template path ERB.
   #
   def render_into target_path
-    refresh
-    
     # For the binding.
     #
     list = extract_list
