@@ -4,7 +4,9 @@ Rspec::Core::RakeTask.new
 task :default => :spec
 
 task :compile do
-  sh 'bin/render'
+  %w(refresh weed render).each do |name|
+    sh "bin/#{name}"
+  end
 end
 
 task :deploy => :compile do
