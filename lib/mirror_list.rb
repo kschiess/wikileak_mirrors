@@ -27,13 +27,6 @@ class MirrorList
     store.store new_list
   end
   
-  # Checks all links in the list. Links that don't work are removed from the
-  # list. 
-  #
-  def check
-    
-  end
-  
   # Separates the good from the bad and saves the clean list.
   #
   def weed

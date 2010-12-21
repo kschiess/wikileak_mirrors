@@ -72,7 +72,7 @@ class LinkChecker
       worker.check(link, transport)
     end
     
-    bar = ProgressBar.new('links', links.size)
+    # bar = ProgressBar.new('links', links.size)
     links.size.times do
       answer = transport.read
       link, status = answer
@@ -82,9 +82,9 @@ class LinkChecker
       else
         @good << link.to_s
       end
-      bar.inc
+      # bar.inc
     end
-    bar.finish
+    # bar.finish
 
     # scheduler.shutdown
   end
