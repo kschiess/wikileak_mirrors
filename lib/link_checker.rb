@@ -65,7 +65,7 @@ class LinkChecker
     transport = FramedIo.new
     
     scheduler = Scheduler.start(
-      DispatchStrategy::Throttled.new(3))
+      SpawnStrategy::Throttled.new(3))
 
     worker = scheduler.create_proxy(Worker.new)
     links.each do |link|
