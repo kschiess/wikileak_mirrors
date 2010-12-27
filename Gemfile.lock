@@ -5,7 +5,7 @@ GEM
     ffi (1.0.2)
       rake (>= 0.8.7)
     flexmock (0.8.11)
-    procrastinate (0.2.0)
+    procrastinate (0.3.0)
       state_machine (~> 0.9.4)
     progressbar (0.9.0)
     rake (0.8.7)

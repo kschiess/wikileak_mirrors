@@ -67,7 +67,7 @@ class LinkChecker
     scheduler = Scheduler.start(
       SpawnStrategy::Throttled.new(3))
 
-    worker = scheduler.create_proxy(Worker.new)
+    worker = scheduler.proxy(Worker.new)
     links.each do |link|
       worker.check(link, transport)
     end
